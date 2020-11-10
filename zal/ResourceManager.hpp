@@ -14,8 +14,8 @@ class ResourceManager
       res= new Resource;
     };
 
-    ResourceManager(const ResourceManager& xd) {
-      res = new Resource(*(xd.res)); 
+    ResourceManager(const ResourceManager& resM) {
+      res = new Resource(*(resM.res)); 
       }
 
     ResourceManager& operator=(const ResourceManager&  resM)
