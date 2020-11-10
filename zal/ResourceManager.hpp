@@ -14,8 +14,8 @@ class ResourceManager
       res= new Resource;
     };
 
-    ResourceManager(const ResourceManager& resM) {
-      res = new Resource(*(resM.res)); 
+    ResourceManager(const ResourceManager& xd) {
+      res = new Resource(*(xd.res)); 
       }
 
     ResourceManager& operator=(const ResourceManager&  resM)
@@ -45,5 +45,5 @@ class ResourceManager
     {
         delete res;
     }
-    double get() { return Rres->get(); };  
+    double get() { return res->get(); };  
 };
