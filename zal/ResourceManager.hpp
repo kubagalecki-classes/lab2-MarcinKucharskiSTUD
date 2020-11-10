@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Resource.hpp"
+using namespace std;
+
 
 class ResourceManager
 {
@@ -12,22 +14,23 @@ class ResourceManager
       res= new Resource;
     };
 
-    ResourceManager(const ResourceManager& resM) { res = new Resource(*(resM.res)); }
+    ResourceManager(const ResourceManager& resM) {
+      res = new Resource(*(resM.res)); 
+      }
 
     ResourceManager& operator=(const ResourceManager&  resM)
     {
       if (this != &resM)
        {
-             *R = *(resM.res);
+             *res = *(resM.res);
        }
        return *this;
-
     }
     ResourceManager(ResourceManager&& resM) : res(resM.res)
     {
         resM.res         = nullptr;
     }
-    ResourceManager& operator=(ResourceManager&& reM )
+    ResourceManager& operator=(ResourceManager&& resM )
     {
         if (&resM == this)
         {
