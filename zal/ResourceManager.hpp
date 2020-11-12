@@ -1,49 +1,51 @@
 #pragma once
-
+#include <iostream>
 #include "Resource.hpp"
 using namespace std;
 
-
 class ResourceManager
 {
-  public:
-    Resource* res;
+public:
 
-    ResourceManager()
-    {
-      res= new Resource;
-    };
+  ResourceManager() {
+      nowy = new Resource;
+  }
 
-    ResourceManager(const ResourceManager& resM) {
-      res = new Resource(*(resM.res)); 
-      }
-
-    ResourceManager& operator=(const ResourceManager&  resM)
-    {
-      if (this != &resM)
-       {
-             *res = *(resM.res);
-       }
-       return *this;
+  ResourceManager(ResourceManager&& res){
+        nowy   = res.nowy;
+        res.nowy = nullptr;
     }
-    ResourceManager(ResourceManager&& resM) : res(resM.res)
-    {
-        resM.res         = nullptr;
-    }
-    ResourceManager& operator=(ResourceManager&& resM )
-    {
-        if (&resM == this)
-        {
+
+  ResourceManager& operator=(ResourceManager&& opp){
+    if (&opp == this){
             return *this;
-            delete res;
-            res=resM.res;
-            resM.res = nullptr;
-            return *this;
-        }
+        delete nowy;
+        nowy       = opp.nowy;
+        opp.nowy = nullptr;
+        return *this;
     }
-    ~ResourceManager()
-    {
-        delete res;
+  }
+
+  ResourceManager(const ResourceManager& kop){
+    nowy = new Resource;
+    *nowy = *kop.nowy;
+  }
+
+  ResourceManager& operator=(const ResourceManager& przypis){
+   if (this != &przypis){
+            *nowy= *przypis.nowy;
+        return *this;
+     }
+  }
+
+  double get(){
+    return nowy->get();
+   }
+
+  ~ResourceManager(){
+     delete nowy;
     }
-    double get() { return res->get(); };  
+  private:
+    Resource *nowy;
+
 };
